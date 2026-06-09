@@ -11,7 +11,7 @@ function gcd(a, b) {
   return a;
 }
 
-app.get("/borhanuddin4me_gmail_com", (req, res) => {
+app.get(["/borhanuddin4me_gmail_com", "/borhanuddin4me_gmail_com/"], (req, res) => {
   const x = req.query.x;
   const y = req.query.y;
 
