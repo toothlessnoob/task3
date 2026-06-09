@@ -1,9 +1,8 @@
 const express = require("express");
-
 const app = express();
 
 function gcd(a, b) {
-  while (b !== 0) {
+  while (b !== 0n) {
     let temp = b;
     b = a % b;
     a = temp;
@@ -15,21 +14,17 @@ app.get("/borhanuddin4me_gmail_com", (req, res) => {
   const x = req.query.x;
   const y = req.query.y;
 
-  if (
-    !/^\d+$/.test(x) ||
-    !/^\d+$/.test(y) ||
-    Number(x) < 1 ||
-    Number(y) < 1
-  ) {
+  if (!x || !y || !/^\d+$/.test(x) || !/^\d+$/.test(y)) {
     return res.send("NaN");
   }
 
-  const a = Number(x);
-  const b = Number(y);
+  const a = BigInt(x);
+  const b = BigInt(y);
 
-  const lcm = (a * b) / gcd(a, b);
+  const g = gcd(a, b);
+  const lcm = (a * b) / g;
 
-  res.send(String(lcm));
+  res.send(lcm.toString());
 });
 
 app.listen(3000, () => {
